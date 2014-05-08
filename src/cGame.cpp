@@ -88,7 +88,7 @@ int Game::main()
 
   if(!error) {
     uint frame = 0;
-    mWindow.switchFullScreen();
+    //mWindow.switchFullScreen();
 
     mTimer.start();
     while(!mInput.check(Input::KESC)) {

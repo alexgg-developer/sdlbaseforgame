@@ -11,7 +11,7 @@ bool Renderer::initApp()
     /*texUniform = glGetUniformLocation(mProgramID, "teximg");
     std::cerr << "uniform tex: " << texUniform << std::endl;*/
     Texture tex;
-    if (!tex.load("../resources/img/nehe.png") || !tex.init()) {
+    if (!tex.load("../resources/img/nehe.png")) {
         std::cerr << "ERROR! shiet tex" << std::endl;
         success = false;
     }

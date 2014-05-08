@@ -87,6 +87,7 @@ bool Texture::load(std::string fileName)
            std::cout << "Error loading texture" << gluErrorString( error ) << std::endl;
            success = false;
        }
+       success = init();
      }
    }
 
@@ -126,6 +127,7 @@ bool Texture::load(std::string fileName, vec3 const & colorKey )
            std::cout << "Error loading texture" << gluErrorString( error ) << std::endl;
            success = false;
        }
+       success = init();
      }
    }
 
