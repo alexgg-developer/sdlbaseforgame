@@ -31,7 +31,10 @@ bool Texture::load(std::string fileName)
        glGenTextures( 1, &mTexture );
        glBindTexture( GL_TEXTURE_2D, mTexture );
        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, mTextureSurface->pixels );
-       glBindTexture( GL_TEXTURE_2D, 0 );
+       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+       //glBindTexture( GL_TEXTURE_2D, 0 );
        //Check for error
        GLenum error = glGetError();
        if( error != GL_NO_ERROR ) {

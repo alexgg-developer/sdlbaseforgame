@@ -88,16 +88,18 @@ int Game::main()
   if(!error) {
     uint frame = 0;
     Text textTime;
-    Text textLoopTime;
+    /*Text textLoopTime;
     textTime.loadFont("../resources/fonts/lazy.ttf", 28);
     textLoopTime.loadFont("../resources/fonts/lazy.ttf", 28);
     SDL_Color textColor = { 255, 0, 0, 255 };
     textTime.loadText("Such a text, much beauty HIGH", textColor, LOW );
     textTime.setPosition(vec3(0, 0));
     textLoopTime.loadText("Such a text, much beauty HIGH", textColor, HIGH );
-    textLoopTime.setPosition(vec3(0, textTime.mHeight));
+    textLoopTime.setPosition(vec3(0, textTime.mHeight));*/
     Texture texture;
-    texture.load("../resources/img/nehe.bmp");
+    if (!texture.load("../resources/img/nehe.png")) {
+        std::cerr << "ERROR! shiet tex" << std::endl;
+    }
 
 
     Timer timer;
@@ -131,7 +133,7 @@ int Game::main()
 
     texture.free();
     textTime.free();
-    textLoopTime.free();
+    //textLoopTime.free();
     error = quit();
   }
   else quit();

@@ -17,6 +17,9 @@ private:
   std::vector<GLShader> mFragmentShader;
   std::vector<GLuint> mVBO;
   std::vector<GLuint> mIBO;
+
+  GLuint texUniform;
+
   bool link();
   void printProgramLog(GLuint program);
 

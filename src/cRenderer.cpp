@@ -8,7 +8,7 @@ bool Renderer::initGL()
 {
   bool success = true;
 
-  /*mProgramID = glCreateProgram();
+  mProgramID = glCreateProgram();
   GLShader defaultVertexShader;
   defaultVertexShader.init(GLShader::VERTEX, mProgramID);
   success = defaultVertexShader.compile();
@@ -17,16 +17,19 @@ bool Renderer::initGL()
   defaultFragmentShader.init(GLShader::FRAGMENT, mProgramID);
   success = defaultFragmentShader.compile();
   mFragmentShader.push_back(defaultFragmentShader);
-  link();*/
+  link();
+
+  texUniform = glGetUniformLocation(mProgramID, "teximg");
+  std::cerr << "uniform tex: " << texUniform << std::endl;
 
 
-  /*GLfloat vertexData[] =
+  GLfloat vertexData[] =
   {
     -0.5f, -0.5f,
      0.5f, -0.5f,
      0.5f,  0.5f,
     -0.5f,  0.5f
-  };*/
+  };
 
 
   const uint SCREEN_WIDTH = 800;
@@ -46,7 +49,7 @@ bool Renderer::initGL()
   gQuadVertices[ 3 ].x = SCREEN_WIDTH * 1.f / 30.f;
   gQuadVertices[ 3 ].y = SCREEN_HEIGHT * 3.f / 30.f;*/
 
-  gQuadVertices[ 0 ].x = 0.0f;
+  /*gQuadVertices[ 0 ].x = 0.0f;
   gQuadVertices[ 0 ].y = 0.0f;
 
   gQuadVertices[ 1 ].x = SCREEN_WIDTH * 3.f / 30.f;
@@ -56,20 +59,20 @@ bool Renderer::initGL()
   gQuadVertices[ 2 ].y = SCREEN_HEIGHT * 3.f / 30.f;
 
   gQuadVertices[ 3 ].x = SCREEN_WIDTH * 1.f / 30.f;
-  gQuadVertices[ 3 ].y = SCREEN_HEIGHT * 3.f / 30.f;
+  gQuadVertices[ 3 ].y = SCREEN_HEIGHT * 3.f / 30.f;*/
 
 
   GLuint indexData[] = { 0, 1, 2, 3 };
 
- /* GLuint vbo = 0;
+  GLuint vbo = 0;
   glGenBuffers( 1, &vbo );
   glBindBuffer( GL_ARRAY_BUFFER, vbo );
-  glBufferData( GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW );*/
-  GLuint gVertexBuffer;
+  glBufferData( GL_ARRAY_BUFFER, 2 * 4 * sizeof(GLfloat), vertexData, GL_STATIC_DRAW );
+  /*GLuint gVertexBuffer;
   glGenBuffers( 1, &gVertexBuffer );
   glBindBuffer( GL_ARRAY_BUFFER, gVertexBuffer );
-  glBufferData( GL_ARRAY_BUFFER, 4 * sizeof(LVertexPos2D), gQuadVertices, GL_STATIC_DRAW );
-  mVBO.push_back(gVertexBuffer);
+  glBufferData( GL_ARRAY_BUFFER, 4 * sizeof(LVertexPos2D), gQuadVertices, GL_STATIC_DRAW );*/
+  mVBO.push_back(vbo);
 
 
   GLuint ibo = 0;
@@ -111,22 +114,25 @@ bool Renderer::link()
 
 void Renderer::render()
 {
-  /*glUseProgram( mProgramID );
+  glUseProgram( mProgramID );
   GLuint attributeLocation = mVertexShader[0].setAttribute("LVertexPos2D");
+
   glEnableVertexAttribArray( attributeLocation );
   glBindBuffer( GL_ARRAY_BUFFER, mVBO[0] );
   glVertexAttribPointer( attributeLocation, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL );
   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mIBO[0] );
   glDrawElements( GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL );
   mVertexShader[0].unsetAttribute(attributeLocation);
-  glUseProgram( NULL );*/
-  glColor3f(1.0f, 0.0f, 0.0f);
+  glUseProgram( NULL );
+
+
+  /*glColor3f(1.0f, 0.0f, 0.0f);
   glEnableClientState( GL_VERTEX_ARRAY );
   glBindBuffer( GL_ARRAY_BUFFER, mVBO[0] );
   glVertexPointer( 2, GL_FLOAT, 0, NULL );
   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mIBO[0] );
   glDrawElements( GL_QUADS, 4, GL_UNSIGNED_INT, NULL );
-  glDisableClientState( GL_VERTEX_ARRAY );
+  glDisableClientState( GL_VERTEX_ARRAY );*/
 }
 
 void Renderer::free()

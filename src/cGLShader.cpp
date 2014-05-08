@@ -8,14 +8,14 @@ void GLShader::init(KindOfShader kind, uint programID)
   switch(kind) {
     case VERTEX: {
       mID = glCreateShader( GL_VERTEX_SHADER );
-      mShaderSource = "#version 130\nin vec2 LVertexPos2D; void main() { gl_Position = vec4( LVertexPos2D.x, LVertexPos2D.y, 0, 1 ); }";
+      mShaderSource = "#version 130\nin vec2 LVertexPos2D; out vec2 texcoords; void main() { texcoords = LVertexPos2D.xy + 0.5; texcoords.y = 1.0 - texcoords.y; gl_Position = vec4( LVertexPos2D.x, LVertexPos2D.y, 0, 1 ); }";
       const char* source = mShaderSource.c_str();
       glShaderSource( mID, 1, &source, NULL );
     }
     break;
     case FRAGMENT: {
       mID = glCreateShader( GL_FRAGMENT_SHADER );
-      mShaderSource = "#version 130\nout vec4 LFragment; void main() { LFragment = vec4( 1.0, 0.0, 0.0, 1.0 ); }";
+      mShaderSource = "#version 130\nin vec2 texcoords; uniform sampler2D teximg; out vec4 LFragment; void main() { LFragment = texture2D(teximg, texcoords.xy); }";
       const char* source = mShaderSource.c_str();
       glShaderSource( mID, 1, &source, NULL );
     }
